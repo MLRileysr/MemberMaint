@@ -33,6 +33,12 @@
             this.btnFirstName = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panelBday = new System.Windows.Forms.Panel();
+            this.btnSearchDate = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.btnlastSearch = new System.Windows.Forms.Button();
             this.btnInport = new System.Windows.Forms.Button();
@@ -48,13 +54,8 @@
             this.cmbGroup = new System.Windows.Forms.ComboBox();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.panelBday = new System.Windows.Forms.Panel();
-            this.btnSearchDate = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new System.Windows.Forms.Label();
             this.panDispClients = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel4.SuspendLayout();
             this.panelBday.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +73,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(752, 54);
+            this.txtSearch.Location = new System.Drawing.Point(752, 52);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(142, 20);
             this.txtSearch.TabIndex = 11;
@@ -103,6 +104,7 @@
             this.panel4.Controls.Add(this.panelBday);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.btnlastSearch);
+            this.panel4.Controls.Add(this.txtSearch);
             this.panel4.Controls.Add(this.btnInport);
             this.panel4.Controls.Add(this.btnExport);
             this.panel4.Controls.Add(this.btnSkill);
@@ -118,12 +120,73 @@
             this.panel4.Controls.Add(this.cmbStatus);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.cmbPstatus);
-            this.panel4.Controls.Add(this.txtSearch);
             this.panel4.Controls.Add(this.btnFirstName);
-            this.panel4.Location = new System.Drawing.Point(25, 12);
+            this.panel4.Location = new System.Drawing.Point(29, 45);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(907, 78);
             this.panel4.TabIndex = 0;
+            // 
+            // panelBday
+            // 
+            this.panelBday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panelBday.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelBday.Controls.Add(this.btnSearchDate);
+            this.panelBday.Controls.Add(this.label8);
+            this.panelBday.Controls.Add(this.dateTimePicker2);
+            this.panelBday.Controls.Add(this.label7);
+            this.panelBday.Controls.Add(this.dateTimePicker1);
+            this.panelBday.Location = new System.Drawing.Point(253, 6);
+            this.panelBday.Name = "panelBday";
+            this.panelBday.Size = new System.Drawing.Size(211, 64);
+            this.panelBday.TabIndex = 66;
+            this.panelBday.Visible = false;
+            // 
+            // btnSearchDate
+            // 
+            this.btnSearchDate.Location = new System.Drawing.Point(62, 38);
+            this.btnSearchDate.Name = "btnSearchDate";
+            this.btnSearchDate.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchDate.TabIndex = 2;
+            this.btnSearchDate.Text = "Start Search";
+            this.btnSearchDate.UseVisualStyleBackColor = true;
+            this.btnSearchDate.Click += new System.EventHandler(this.btnSearchDate_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(112, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 68;
+            this.label8.Text = "to date";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "MM/dd/";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(158, 13);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(49, 20);
+            this.dateTimePicker2.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(0, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(51, 13);
+            this.label7.TabIndex = 66;
+            this.label7.Text = "from date";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "MM/dd";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(57, 13);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(49, 20);
+            this.dateTimePicker1.TabIndex = 0;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label1
             // 
@@ -280,87 +343,34 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Select Personal Status";
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "MM/dd";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(57, 13);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(49, 20);
-            this.dateTimePicker1.TabIndex = 0;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // panelBday
-            // 
-            this.panelBday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panelBday.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelBday.Controls.Add(this.btnSearchDate);
-            this.panelBday.Controls.Add(this.label8);
-            this.panelBday.Controls.Add(this.dateTimePicker2);
-            this.panelBday.Controls.Add(this.label7);
-            this.panelBday.Controls.Add(this.dateTimePicker1);
-            this.panelBday.Location = new System.Drawing.Point(253, 6);
-            this.panelBday.Name = "panelBday";
-            this.panelBday.Size = new System.Drawing.Size(211, 64);
-            this.panelBday.TabIndex = 66;
-            this.panelBday.Visible = false;
-            // 
-            // btnSearchDate
-            // 
-            this.btnSearchDate.Location = new System.Drawing.Point(62, 38);
-            this.btnSearchDate.Name = "btnSearchDate";
-            this.btnSearchDate.Size = new System.Drawing.Size(75, 23);
-            this.btnSearchDate.TabIndex = 2;
-            this.btnSearchDate.Text = "Start Search";
-            this.btnSearchDate.UseVisualStyleBackColor = true;
-            this.btnSearchDate.Click += new System.EventHandler(this.btnSearchDate_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(112, 13);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 13);
-            this.label8.TabIndex = 68;
-            this.label8.Text = "to date";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "MM/dd/";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(158, 13);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(49, 20);
-            this.dateTimePicker2.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(0, 13);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 13);
-            this.label7.TabIndex = 66;
-            this.label7.Text = "from date";
-            // 
             // panDispClients
             // 
             this.panDispClients.AutoScroll = true;
             this.panDispClients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panDispClients.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panDispClients.Location = new System.Drawing.Point(12, 93);
+            this.panDispClients.Location = new System.Drawing.Point(12, 129);
             this.panDispClients.Name = "panDispClients";
             this.panDispClients.Size = new System.Drawing.Size(948, 452);
             this.panDispClients.TabIndex = 1;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(284, 12);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(403, 23);
+            this.progressBar1.TabIndex = 2;
             // 
             // StartDispAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(972, 549);
+            this.ClientSize = new System.Drawing.Size(972, 578);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panDispClients);
             this.Controls.Add(this.panel4);
             this.Name = "StartDispAll";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.StartDispAll_Load);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panelBday.ResumeLayout(false);
@@ -397,5 +407,6 @@
         private System.Windows.Forms.Button btnlastSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panDispClients;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

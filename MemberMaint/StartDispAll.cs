@@ -59,15 +59,20 @@ namespace MemberMaint
             else
             {
                 InitializeComponent();
+                this.Show();
             }
             Lastsearch = dispName;
             Mainloop();
+        }
+        private void StartDispAll_Load(object sender, EventArgs e)
+        {
+            txtTitle.Text = "Loading";
+            this.Text = "  DisplayALL     ***Current user is " + UserSignedOn.Trim() + " * **";
         }
         private void Mainloop()
         {    // first create/open the database (name & location comes from dbPath in varibles)
             getMemb = new SQLiteConnection(var.dbPath());
             getMemb.CreateTable<Member>();
-            this.Text = "  DisplayALL     ***Current user is " + UserSignedOn.Trim() + " * **";
             clearview();
             fillDrop();
             searchtxt = "";
@@ -460,8 +465,15 @@ namespace MemberMaint
             if (tab == 0) tab = 13;
             int b = 0;
             txtRecrdCount.Text = select.Count.ToString();
+            progressBar1.Visible = true;
+            progressBar1.Maximum = 500;
+            int proValue;
+            int increment = progressBar1.Maximum / select.Count;
+            progressBar1.Maximum = increment * select.Count; 
             foreach (Member Record in select)               //fill rest of panel with order data
             {
+                proValue = progressBar1.Value;
+                progressBar1.Increment(increment);
                 if (b < picperRow)                      // count columns to Max
                 {
                     displaytab = (b * cellwidth) + tab;
@@ -477,6 +489,8 @@ namespace MemberMaint
                     setdisploc(Record);
                 }
             }//end for each
+            progressBar1.Value = 0;
+            progressBar1.Visible = false;
             txtTitle.Visible = true;
         }
         private void setdisploc(Member rec)       // cell to display at current column & row
@@ -501,8 +515,6 @@ namespace MemberMaint
         }
         private int boxdisp(PictureBox picbx, Member rrow)
         {
-            //  string Sex = rrow.SexGender;
-            //  string Sexper = rrow.PersonalStatus;
             string imageID = rrow.FullName.Trim();
             imageID = imageID.Replace(" ", "_") + ".jpg";
             imageID = var.imagetargetpath + imageID;
